@@ -1,0 +1,65 @@
+Agents: IntentFindingAgent
+    Tools : KnowledgeBase :[FrequentAskedQueries]
+    SingularTasks : intentIdentify ->
+    query  find 5 plans in epc system
+    
+    "intent": {
+    "name": "findplaninepc",
+    "confidence_score": 0.92,
+    "description": "User wants to find plans available in the EPC system."
+  },
+
+  "entities": [
+    {
+      "name": "count",
+      "value": "5",
+      "type": "string",
+      "confidence_score": 0.95
+    },
+    {
+      "name": "systename",
+      "value": "EPC",
+      "type": "system_reference",
+      "confidence_score": 0.88
+    }
+  ],
+
+ Query : validate plan PKG123 in all system
+
+  "intent": {
+    "name": "check_plan_validity",
+    "confidence_score": 0.92,
+    "description": "User wants to verify whether a telecom plan is currently active and valid."
+  },
+  "entities": [
+    {
+      "name": "plan_id",
+      "value": "PK123",
+      "type": "string",
+      "confidence_score": 0.95
+    },
+    {
+      "name": "system",
+      "value": "Catalogue Manager",
+      "type": "system_reference",
+      "confidence_score": 0.88
+    }
+  ],
+  "context": {
+    "user_id": "customer_456",
+    "session_id": "sess_202509031230",
+    "language": "en",
+    "channel": "webchat",
+    "timestamp": "2025-09-03T12:30:00Z"
+  },
+  "routing": {
+    "next_step": "validate_plan_in_systems",
+    "priority": "high",
+    "escalation_required": false
+  },
+  "metadata": {
+    "model_version": "intent-agent-v1.3.2",
+    "latency_ms": 123,
+    "explanation": "Detected intent as 'check_plan_validity' because user mentioned 'plan validity check' with plan ID."
+  }
+}
